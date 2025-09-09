@@ -72,8 +72,8 @@ function CrackersList() {
             {/* Left Content */}
             <div className="product-info">
               <p className="product-name">{product.id}. {product.name}</p>
-              <p className="product-content">{product.content}</p>
-              <p className="product-pack">{product.pack}</p>
+              {/* <p className="product-content">{product.content}</p>
+              <p className="product-pack">{product.pack}</p> */}
               <p className="product-price">Rs. {product.price.toFixed(2)}</p>
             </div>
 
