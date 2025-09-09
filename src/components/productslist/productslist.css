@@ -1,0 +1,152 @@
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.product-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+}
+
+.product-info {
+  max-width: 60%;
+}
+
+.product-name {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0;
+}
+
+.product-content {
+  font-size: 14px;
+  color: #444;
+  margin: 3px 0;
+}
+
+.product-pack {
+  font-size: 14px;
+  color: #555;
+}
+
+.product-price {
+  font-weight: bold;
+  color: green;
+  margin-top: 5px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.controls button {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  background: #f2f2f2;
+  cursor: pointer;
+}
+
+.controls input {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.row-total {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.net-total {
+  margin-top: 20px;
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.print-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.print-btn button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.print-btn button:hover {
+  background: #0056b3;
+}
+/* Container for the whole product card */
+.product-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Image wrapper */
+.product-img {
+  flex-shrink: 0; /* prevents image from shrinking */
+}
+
+/* Actual image */
+.product-img img {
+  width: 100px;        /* adjust as you like */
+  height: 100px;       /* keep square */
+  object-fit: cover;   /* crop nicely */
+  border-radius: 8px;  /* rounded corners */
+  border: 1px solid #ccc;
+}
+
+/* Info text next to image */
+.product-info {
+  flex: 1; /* take remaining space */
+}
+
+
+
+
+/* Hide Print button in actual PDF/Print */
+@media print {
+  .print-btn {
+    display: none;
+  }}
