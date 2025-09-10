@@ -13,7 +13,7 @@ import pic from "../../assets/pic.jpg";
 const [products, setProducts] = useState([]);
 
 useEffect(() => {
-  fetch("https://crackerbackend.onrender.com/products/")  // 👈 replace with your Render API link
+  fetch("https://crackerbackend.onrender.com/api/products/")  // 👈 replace with your Render API link
     .then((res) => res.json())
     .then((data) => setProducts(data))
     .catch((err) => console.error("Error fetching products:", err));
