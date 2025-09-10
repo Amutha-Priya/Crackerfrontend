@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import "./productslist.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -10,17 +10,20 @@ import pic from "../../assets/pic.jpg";
 //   { id: 3, name: "12 CM ELECTRIC SPARKLER 10 Pcs", content: "12 செ.மீ சாதா கம்பி (5 BOX)", pack: "5 BOX", price: 85,image:pic },
 //   { id: 4, name: "12 CM COLOUR SPARKLER 10 Pcs", content: "12 செ.மீ color கம்பி (5 BOX)", pack: "5 BOX", price: 90,image:pic },
 // ];
-const [products, setProducts] = useState([]);
+
+
+
+
+function CrackersList() {
+  const [cart, setCart] = useState({});
+  const [products, setProducts] = useState([]);
 
 useEffect(() => {
-  fetch("https://crackerbackend.onrender.com/api/products/")  // 👈 replace with your Render API link
+  fetch("https://crackerbackend.onrender.com/api/products/") 
     .then((res) => res.json())
     .then((data) => setProducts(data))
     .catch((err) => console.error("Error fetching products:", err));
 }, []);
-
-function CrackersList() {
-  const [cart, setCart] = useState({});
 
   const updateQty = (id, change, price) => {
     setCart((prev) => {
