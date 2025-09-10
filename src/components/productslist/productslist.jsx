@@ -4,12 +4,20 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import pic from "../../assets/pic.jpg";
 
-const products = [
-  { id: 1, name: "10 CM ELECTRIC SPARKLER 10 Pcs", content: "10 செ.மீ சாதா கம்பி", pack: "5 BOX", price: 50 ,image:pic},
-  { id: 2, name: "10 CM COLOUR SPARKLER 10 Pcs", content: "10 செ.மீ color கம்பி", pack: "5 BOX", price: 55 ,image:pic},
-  { id: 3, name: "12 CM ELECTRIC SPARKLER 10 Pcs", content: "12 செ.மீ சாதா கம்பி (5 BOX)", pack: "5 BOX", price: 85,image:pic },
-  { id: 4, name: "12 CM COLOUR SPARKLER 10 Pcs", content: "12 செ.மீ color கம்பி (5 BOX)", pack: "5 BOX", price: 90,image:pic },
-];
+// const products = [
+//   { id: 1, name: "10 CM ELECTRIC SPARKLER 10 Pcs", content: "10 செ.மீ சாதா கம்பி", pack: "5 BOX", price: 50 ,image:pic},
+//   { id: 2, name: "10 CM COLOUR SPARKLER 10 Pcs", content: "10 செ.மீ color கம்பி", pack: "5 BOX", price: 55 ,image:pic},
+//   { id: 3, name: "12 CM ELECTRIC SPARKLER 10 Pcs", content: "12 செ.மீ சாதா கம்பி (5 BOX)", pack: "5 BOX", price: 85,image:pic },
+//   { id: 4, name: "12 CM COLOUR SPARKLER 10 Pcs", content: "12 செ.மீ color கம்பி (5 BOX)", pack: "5 BOX", price: 90,image:pic },
+// ];
+const [products, setProducts] = useState([]);
+
+useEffect(() => {
+  fetch("https://crackerbackend.onrender.com/products/")  // 👈 replace with your Render API link
+    .then((res) => res.json())
+    .then((data) => setProducts(data))
+    .catch((err) => console.error("Error fetching products:", err));
+}, []);
 
 function CrackersList() {
   const [cart, setCart] = useState({});
