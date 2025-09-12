@@ -1,30 +1,24 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./productslist.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import pic from "../../assets/pic.jpg";
-
-// const products = [
-//   { id: 1, name: "10 CM ELECTRIC SPARKLER 10 Pcs", content: "10 செ.மீ சாதா கம்பி", pack: "5 BOX", price: 50 ,image:pic},
-//   { id: 2, name: "10 CM COLOUR SPARKLER 10 Pcs", content: "10 செ.மீ color கம்பி", pack: "5 BOX", price: 55 ,image:pic},
-//   { id: 3, name: "12 CM ELECTRIC SPARKLER 10 Pcs", content: "12 செ.மீ சாதா கம்பி (5 BOX)", pack: "5 BOX", price: 85,image:pic },
-//   { id: 4, name: "12 CM COLOUR SPARKLER 10 Pcs", content: "12 செ.மீ color கம்பி (5 BOX)", pack: "5 BOX", price: 90,image:pic },
-// ];
-
-
-
 
 function CrackersList() {
   const [cart, setCart] = useState({});
   const [products, setProducts] = useState([]);
 
-useEffect(() => {
-  fetch("https://crackerbackend.onrender.com/api/products/") 
-    .then((res) => res.json())
-    .then((data) => setProducts(data))
-    .catch((err) => console.error("Error fetching products:", err));
-}, []);
+  // Fetch products from backend
+  useEffect(() => {
+    fetch("https://crackersbackend-upmi.onrender.com/app/products/")
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => setProducts(data))
+      .catch((err) => console.error("Error fetching products:", err));
+  }, []);
 
+  // Update quantity in cart
   const updateQty = (id, change, price) => {
     setCart((prev) => {
       const qty = (prev[id]?.qty || 0) + change;
@@ -38,7 +32,7 @@ useEffect(() => {
 
   const netTotal = Object.values(cart).reduce((sum, item) => sum + item.total, 0);
 
-  // ✅ Generate PDF
+  // Generate PDF
   const handleGeneratePDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
@@ -51,9 +45,9 @@ useEffect(() => {
       doc.text("No items ordered.", 14, 30);
     } else {
       const tableData = orderedItems.map((item) => [
-        item.name,
-        cart[item.id].qty,                 
-        `₹${item.price}`,
+        item.Product_name,
+        cart[item.id].qty,
+        `₹${item.Product_price}`,
         `₹${cart[item.id].total}`,
       ]);
 
@@ -78,32 +72,30 @@ useEffect(() => {
         {products.map((product) => (
           <div key={product.id} className="product-card">
             <div className="product-img">
-              <img src={product.image} alt={product.name} />
+              <img src={product.Product_image} alt={product.Product_name} />
             </div>
-            {/* Left Content */}
             <div className="product-info">
-              <p className="product-name">{product.id}. {product.name}</p>
-              {/* <p className="product-content">{product.content}</p>
-              <p className="product-pack">{product.pack}</p> */}
-              <p className="product-price">Rs. {product.price.toFixed(2)}</p>
+              <p className="product-name">
+                {product.id}. {product.Product_name}
+              </p>
+              <p className="product-price">
+                Rs. {product.Product_price ? product.Product_price.toFixed(2) : "0.00"}
+              </p>
             </div>
-
-            {/* Right Controls */}
             <div className="controls">
-              <button onClick={() => updateQty(product.id, -1, product.price)}>-</button>
+              <button onClick={() => updateQty(product.id, -1, product.Product_price)}>-</button>
               <input type="text" readOnly value={cart[product.id]?.qty || 0} />
-              <button onClick={() => updateQty(product.id, 1, product.price)}>+</button>
+              <button onClick={() => updateQty(product.id, 1, product.Product_price)}>+</button>
               <p className="row-total">Rs.{cart[product.id]?.total || 0}</p>
             </div>
           </div>
         ))}
       </div>
 
-      
       <div className="net-total">Net Total: ₹ {netTotal}</div>
 
       <div className="print-btn">
-        <button onClick={handleGeneratePDF}> Download Order PDF</button>
+        <button onClick={handleGeneratePDF}>Download Order PDF</button>
       </div>
     </div>
   );
